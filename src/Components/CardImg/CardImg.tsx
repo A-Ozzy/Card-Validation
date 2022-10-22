@@ -1,22 +1,36 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
+import state from '../store/state';
+import { observer } from 'mobx-react-lite';
 
-const CardImg: React.FC = () => {
 
-   // w-[500px] h-[420px] 
+const CardImg: React.FC = observer(() => {
+
+
+   const formattedNum = (num: string) => {
+      if (num.length <= 16) {
+         return num.split(/(\d{4})/g).join(" ");
+      }
+   };
+
+
    return (
-      <div className='card-container lg:h-[320px] flex flex-col relative m-5'>
-         <div className='absolute top-[0px] left-[0px]
-           w-[400px] h-[200px] rounded-xl 
-           bg-cart-face bg-no-repeat bg-left-top 
-           bg-[length:100%_100%] z-10 lg:top-[120px]'>
+      <div className='card-container '>
+         <div className='card-face '>
+            <div className="logo-box">
+               <div className="logo-big"></div>
+               <div className="logo-small"></div>
+            </div>
+            <div className="mx-auto card-number tracking-widest self-end text-3xl">{formattedNum(state.cardNumber)}</div>
+            <div className="info flex justify-between tracking-wide text-lg self-end">
+               <div className="card-name">{state.owner}</div>
+               <div className="card-date">{`${state.cardMonth}/${state.cardYear}`}</div>
+            </div>
          </div>
-         <div className='absolute top-[220px] right-[0px]
-            w-[400px] h-[200px] border rounded-xl
-            bg-cart-back bg-no-repeat bg-left-top
-            bg-[length:100%_100%] lg:top-0 lg:right-[20%] md:right-0'>
+         <div className='card-back relative'>
+            <div className="cvc">{state.cvc}</div>
          </div>
       </div>
    );
-};
+});
 
 export default CardImg;

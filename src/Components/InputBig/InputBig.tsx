@@ -1,25 +1,50 @@
 import React from 'react';
 
+type Errorrs = {
+   // ["labelName"]?: {
+   //    message?: string | undefined,
+   // },
+   name: string;
+   exampleRequired: string;
+   message: string;
+   cardNumber: string;
+   cardMonth: string; 
+   cardYear: string;
+   cvc: string;
+};
+
 interface inputI {
    labelName: string,
-   errors: {},
+   errors?: Errorrs,
 };
 
-const InputBig = (labelName: inputI, errors: inputI) => {
+// const InputBig: React.FC<inputI> = ({labelName, errors }) => {
    // return (
-   //    <label className="flex flex-col text-sky-900 text-xs tracking-widest font-semibold my-2">
-   //       {labelName}
-   //       <input placeholder="e.g. Jane Appleseed" className='mt-1 block w-80 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400'
-   //          {...register("firstName", {
-   //             required: "Поле обязательно для заполнения",
-   //          })}
+   //    <label className="label">
+   //       CARDHOLD NAME
+   //       <input placeholder="e.g. Jane Allpeseed" className='input-big'
+   //       // {...register(`${labelName}`, {
+   //       //    required: "Обязательно для заполнения",
+   //       //    minLength: {
+   //       //       value: 4,
+   //       //       message: 'Минимум 4 символов'
+   //       //    },
+   //       //    pattern: {
+   //       //       value: /[A-Za-z]/g,
+   //       //       message: 'Не может быть цифр'
+   //       //    }
+   //       // })}
+   //          // {
+   //          // ...children
+   //          // }
    //       />
    //       <div className="w-80 h-4">
-   //          {errors.firstName && <span className='text-red-400'>{errors?.firstName?.message || "This field is required"}</span>}
+   //          {errors?.["labelName"] && <span className='text-red-400'>
+   //             {errors?.["labelName"]?.message || "This field is required"}
+   //          </span>}
    //       </div>
-
    //    </label>
    // );
-};
+// };
 
-export default InputBig;
+// export default InputBig;

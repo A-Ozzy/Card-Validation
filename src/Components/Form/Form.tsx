@@ -1,18 +1,12 @@
 import React from 'react';
+import { Inputs } from '../Types/Types';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import state from '../store/state';
+import { observer } from 'mobx-react-lite';
 
 
 const Form: React.FC = () => {
 
-   type Inputs = {
-      name: string,
-      exampleRequired: string,
-      message: string,
-      cardNumber: number,
-      cardMonth: number,
-      cardYear: number,
-      cvc: number,
-   };
 
    const {
       register,
@@ -28,8 +22,8 @@ const Form: React.FC = () => {
       shouldFocusError: true,
    });
 
-   const onSubmit:SubmitHandler<Inputs> = (data => {
-      console.log(data);
+   const onSubmit: SubmitHandler<Inputs> = (data => {
+      state.onCardInfoSubmit(data);
       reset();
    });
 
@@ -37,10 +31,10 @@ const Form: React.FC = () => {
    return (
       <div className='form flex justify-center items-center'>
          <form onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col items-center">
-            <label className="flex flex-col text-sky-900 text-xs tracking-widest font-semibold my-2">
+            className="container">
+            <label className="label">
                CARDHOLD NAME
-               <input placeholder="e.g. Jane Allpeseed" className='mt-1 block w-80 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400'
+               <input placeholder="e.g. Jane Allpeseed" className='input-big'
                   {...register("name", {
                      required: "Обязательно для заполнения",
                      minLength: {
@@ -52,17 +46,17 @@ const Form: React.FC = () => {
                         message: 'Не может быть цифр'
                       }
                   })}
+                  onChange={(e)=> state.onOwnerChange(e)}
                />
                <div className="w-80 h-4">
                   {errors?.name && <span className='text-red-400'>
                      {errors?.name?.message || "This field is required"}
                   </span>}
                </div>
-
             </label>
-            <label className="flex flex-col text-sky-900 text-xs tracking-widest font-semibold my-2">
+            <label className="label">
                CARD NUMBER
-               <input placeholder="e.g. 1234_5678_9123_0406" className='mt-1 block w-80 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400'
+               <input placeholder="e.g. 1234_5678_9123_0406" className='input-big'
                   {...register("cardNumber", {
                      required: "Обязательно для заполнения",
                      pattern: {
@@ -75,6 +69,7 @@ const Form: React.FC = () => {
                      },
 
                   })}
+                  onChange={(e)=> state.onCardNumberChange(e)}
                />
                <div className="w-80 h-4">
                   {errors?.cardNumber && <span className='text-red-400'>
@@ -83,65 +78,66 @@ const Form: React.FC = () => {
                </div>
             </label>
             <div className="input-box flex w-80 ">
-               <div className="text-sky-900 text-xs tracking-widest font-semibold my-2 min-w-[45%]">
+               <div className="input-small-box">
                   EXP. DATE (MM/YY)
                   <div className="flex">
                      <div className="input-box">
-                        <input placeholder="MM" className='mt-1 mr-3 block w-14 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400'
+                        <input placeholder="MM" className='input-small'
                            {...register("cardMonth", {
                               required: "Не может быть пустым",
-                              // valueAsNumber: true,
                               pattern: {
                                  value: /\d{1,2}/g,
                                  message: 'Не может быть букв'
-                               },
+                              },
                               min: {
                                  value: 1,
-                                 message: 'Нет такого месяца' // JS only: <p>error message</p> TS only support string
-                               },
+                                 message: 'Нет такого месяца'
+                              },
                               max: {
                                  value: 12,
-                                 message: 'Нет такого месяца' // JS only: <p>error message</p> TS only support string
-                               },
+                                 message: 'Нет такого месяца'
+                              },
                            })}
+                           onChange={(e)=> state.onCardMonthChange(e)}
                         />
-                        {errors.cardMonth && <span className='text-red-400 block max-w-[56px]'>{errors?.cardMonth?.message || "This field is required"}</span>}
+                        {errors.cardMonth && <span className='error'>{errors?.cardMonth?.message || "This field is required"}</span>}
                      </div>
                      <div className="input-box">
-                        <input placeholder="YY" className='mt-1 block w-14 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400'
+                        <input placeholder="YY" className='input-small'
                            {...register("cardYear", {
                               required: "Не может быть пустым",
                               valueAsNumber: true,
                               min: {
                                  value: new Date().getFullYear() - 2006,
-                                 message: 'Карта старше 5 лет' // JS only: <p>error message</p> TS only support string
-                               },
+                                 message: 'Карта старше 5 лет' 
+                              },
                               max: {
                                  value: new Date().getFullYear() + 6 - 2000,
-                                 message: 'Не может быть' // JS only: <p>error message</p> TS only support string
-                               },
+                                 message: 'Не может быть' 
+                              },
                            })}
+                           onChange={(e)=> state.onCardYearChange(e)}
                         />
-                        {errors.cardYear && <div className='text-red-400 block max-w-[56px]'>{errors?.cardYear?.message || "This field is required"}</div>}
+                        {errors.cardYear && <div className='error'>{errors?.cardYear?.message || "This field is required"}</div>}
                      </div>
                   </div>
                </div>
                <div className="dorder-4 ">
-                  <label className="flex flex-col text-sky-900 text-xs tracking-widest font-semibold my-2">
+                  <label className="label-cvc">
                      CVC
-                     <input placeholder="e.g. 123" className='mt-1 block w-40 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400'
+                     <input placeholder="e.g. 123" className='input-cvc'
                         {...register("cvc", {
                            required: "Поле обязательно для заполнения",
-                           // valueAsNumber: true,
                            pattern: {
                               value: /[0-9]{3}/g,
-                              message: 'Требуется 3 цифры' // JS only: <p>error message</p> TS only support string
+                              message: 'Требуется 3 цифры' 
                            },
                            maxLength: {
                               value: 3,
                               message: 'Максимум 3 цифры'
                            },
                         })}
+                        onChange={(e)=> state.onCvcChange(e)}
                      />
                      <div className="w-80 h-4">
                         {errors?.cvc && <span className='text-red-400'>{errors?.cvc?.message || "This field is required"}</span>}
@@ -152,10 +148,10 @@ const Form: React.FC = () => {
             </div>
             <input type="submit"
                disabled={!isValid}
-               value="Confirm" className='disabled:bg-slate-300 my-5 text-yellow-50 tracking-widest w-80 h-[50px] bg-slate-700 rounded-md cursor-pointer' />
+               value="Confirm" className='input-submit' />
          </form>
       </div>
    );
 };
 
-export default Form;
+export default observer(Form);

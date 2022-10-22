@@ -1,5 +1,70 @@
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700&display=swap');
+
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.container {
+   @apply flex flex-col items-center;
+}
+
+.label{
+   @apply flex flex-col text-sky-900 text-xs tracking-widest font-semibold my-2;
+}
+.input-big{
+   @apply mt-1 block w-80 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400;
+}
+.error{
+   @apply text-red-400 block max-w-[56px]
+}
+.input-small-box{
+   @apply text-sky-900 text-xs tracking-widest font-semibold my-2 min-w-[45%]
+}
+.input-small{
+   @apply mt-1 mr-3 block w-14 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+}
+.label-cvc{
+   @apply flex flex-col text-sky-900 text-xs tracking-widest font-semibold my-2
+}
+.input-cvc{
+   @apply mt-1 block w-40 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+}
+.input-submit{
+   @apply disabled:bg-slate-300 my-5 text-yellow-50 tracking-widest w-80 h-[50px] bg-slate-700 rounded-md cursor-pointer
+}
+.card-container{
+   @apply lg:h-[320px] flex flex-col relative m-5 text-slate-50
+}
+.card-face{
+   @apply absolute top-[0px] left-[0px]
+   w-[400px] h-[200px] rounded-xl 
+   bg-card-face bg-no-repeat bg-left-top 
+   bg-[length:100%_100%] z-10 lg:top-[120px] p-5
+   grid 
+}
+.card-back{
+   @apply absolute top-[220px] right-[0px]
+   w-[400px] h-[200px] border rounded-xl
+   bg-card-back bg-no-repeat bg-left-top
+   bg-[length:100%_100%] lg:top-0 lg:right-[20%] md:right-0
+}
+.logo{
+   @apply w-4 h-4 bg-white
+}
+.logo-box{
+   @apply w-20 h-10 flex items-center justify-between
+}
+.logo-big{
+   @apply w-10 h-10 bg-logo-big bg-cover
+}
+.logo-small{
+   @apply w-5 h-5 border-[1px] border-slate-400 rounded-full
+}
+
+.cvc{
+   @apply absolute top-[43%] right-12
+}
+

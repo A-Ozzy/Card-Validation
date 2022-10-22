@@ -1,3 +1,4 @@
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
    content: [
@@ -15,8 +16,10 @@ module.exports = {
          backgroundImage: {
             'main-bg': "url('images/bg-main-desktop.png')",
             'main-bg-mobile': "url('images/bg-main-mobile.png')",
-            'cart-face': "url('images/bg-card-front.png')",
-            'cart-back': "url('images/bg-card-back.png')",
+            'card-face': "url('images/bg-card-front.png')",
+            'card-back': "url('images/bg-card-back.png')",
+            'logo-big': "url('images/card-logo.svg')",
+            'logo-small': "url('images/icon-complete.svg')",
           }
      },
    },
