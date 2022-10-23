@@ -8,6 +8,10 @@ module.exports = {
       screens: {
          'lg': {'max': '1100px'},
          'md': {'max': '870px'},
+         'sm': {'max': '690px'},
+         'extra-sm': {'max': '550px'},
+         '400': {'max': '400px'},
+         '320': {'max': '320px'},
        },
       extend: {
          fontFamily: {

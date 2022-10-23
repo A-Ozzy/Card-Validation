@@ -29,7 +29,7 @@ const Form: React.FC = () => {
 
    
    return (
-      <div className='form flex justify-center items-center'>
+      <div className='form flex justify-center items-center extra-sm:self-start extra-sm:min-w-[90vw]'>
          <form onSubmit={handleSubmit(onSubmit)}
             className="container">
             <label className="label">
@@ -48,7 +48,7 @@ const Form: React.FC = () => {
                   })}
                   onChange={(e)=> state.onOwnerChange(e)}
                />
-               <div className="w-80 h-4">
+               <div className="max-w-[100%] h-4">
                   {errors?.name && <span className='text-red-400'>
                      {errors?.name?.message || "This field is required"}
                   </span>}
@@ -71,13 +71,13 @@ const Form: React.FC = () => {
                   })}
                   onChange={(e)=> state.onCardNumberChange(e)}
                />
-               <div className="w-80 h-4">
+               <div className="max-w-[100%] h-4">
                   {errors?.cardNumber && <span className='text-red-400'>
                      {errors?.cardNumber?.message || "This field is required"}
                   </span>}
                </div>
             </label>
-            <div className="input-box flex w-80 ">
+            <div className="input-box flex w-80 400:justify-center 400:w-full">
                <div className="input-small-box">
                   EXP. DATE (MM/YY)
                   <div className="flex">
@@ -122,7 +122,7 @@ const Form: React.FC = () => {
                      </div>
                   </div>
                </div>
-               <div className="dorder-4 ">
+               <div className="dorder-4 max-w-[50%]">
                   <label className="label-cvc">
                      CVC
                      <input placeholder="e.g. 123" className='input-cvc'
@@ -139,7 +139,7 @@ const Form: React.FC = () => {
                         })}
                         onChange={(e)=> state.onCvcChange(e)}
                      />
-                     <div className="w-80 h-4">
+                     <div className="max-w-[100%] h-4">
                         {errors?.cvc && <span className='text-red-400'>{errors?.cvc?.message || "This field is required"}</span>}
                      </div>
 

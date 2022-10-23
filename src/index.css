@@ -6,16 +6,28 @@
 @tailwind utilities;
 
 
-
+.wrapper {
+   @apply font-body text-base min-w-[100vw] min-h-[100vh] overflow-hidden justify-center items-center flex overflow-hidden
+       bg-main-bg bg-no-repeat bg-left-top bg-[length:40%_100%]
+       lg:bg-[length:100%_40%] extra-sm:bg-[length:100%_35%]
+   
+}
+.content-box{
+   @apply min-w-[80vw] min-h-[80vh] grid grid-cols-2 lg:grid-cols-1 extra-sm:grid-rows-[350px,_1fr]
+   400:w-full 400:h-full
+}
 .container {
-   @apply flex flex-col items-center;
+   @apply flex flex-col items-center 400:p-2
 }
 
 .label{
    @apply flex flex-col text-sky-900 text-xs tracking-widest font-semibold my-2;
+   > div{
+      400:
+   }
 }
 .input-big{
-   @apply mt-1 block w-80 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400;
+   @apply mt-1 block w-80 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 400:w-[300px];
 }
 .error{
    @apply text-red-400 block max-w-[56px]
@@ -33,35 +45,37 @@
    @apply mt-1 block w-40 px-3 py-2 border-2 bg-white border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
 }
 .input-submit{
-   @apply disabled:bg-slate-300 my-5 text-yellow-50 tracking-widest w-80 h-[50px] bg-slate-700 rounded-md cursor-pointer
+   @apply disabled:bg-slate-300 my-5 text-yellow-50 tracking-widest w-80 h-[50px] bg-slate-700 rounded-md cursor-pointer 400:w-[300px]
 }
 .card-container{
-   @apply lg:h-[320px] flex flex-col relative m-5 text-slate-50
+   @apply lg:h-[320px] flex flex-col relative m-5 text-slate-50 400:m-2
 }
 .card-face{
    @apply absolute top-[0px] left-[0px]
    w-[400px] h-[200px] rounded-xl 
    bg-card-face bg-no-repeat bg-left-top 
    bg-[length:100%_100%] z-10 lg:top-[120px] p-5
-   grid 
+   grid extra-sm:w-[300px] extra-sm:h-[160px]
+   400:outline-red-700
 }
 .card-back{
    @apply absolute top-[220px] right-[0px]
    w-[400px] h-[200px] border rounded-xl
    bg-card-back bg-no-repeat bg-left-top
-   bg-[length:100%_100%] lg:top-0 lg:right-[20%] md:right-0
+   bg-[length:100%_100%] lg:top-0 lg:right-[20%] md:right-0 extra-sm:w-[300px] extra-sm:h-[160px]
+   400:left-0
 }
 .logo{
    @apply w-4 h-4 bg-white
 }
 .logo-box{
-   @apply w-20 h-10 flex items-center justify-between
+   @apply w-20 h-10 flex items-center justify-between extra-sm:w-16 extra-sm:h-16
 }
 .logo-big{
-   @apply w-10 h-10 bg-logo-big bg-cover
+   @apply w-10 h-10 bg-logo-big bg-cover extra-sm:w-8 extra-sm:h-8
 }
 .logo-small{
-   @apply w-5 h-5 border-[1px] border-slate-400 rounded-full
+   @apply w-5 h-5 border-[1px] border-slate-400 rounded-full extra-sm:w-4 extra-sm:h-4
 }
 
 .cvc{
